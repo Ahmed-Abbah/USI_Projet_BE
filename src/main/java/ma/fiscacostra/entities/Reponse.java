@@ -16,14 +16,10 @@ public class Reponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reponse;
-
     private TypeQuestion type;
-
-
     @JsonIgnore
     @ManyToOne
     private Question question;
-
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
