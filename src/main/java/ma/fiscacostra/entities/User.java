@@ -1,15 +1,14 @@
 package ma.fiscacostra.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.fiscacostra.enums.Fonction;
 import ma.fiscacostra.enums.Role;
+
+import java.util.List;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
@@ -24,4 +23,7 @@ public class User {
     private String prenom;
     private Fonction fonction;
     private Role role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Vote> vote;
 }
