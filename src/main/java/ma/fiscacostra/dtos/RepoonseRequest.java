@@ -14,4 +14,5 @@ import ma.fiscacostra.enums.TypeQuestion;
 @AllArgsConstructor
 public class RepoonseRequest {
     private String reponse;
+
 }

@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionRequest {
-    private String question;
-
+public class VoteRequest {
+    private int nbreVote;
 }
