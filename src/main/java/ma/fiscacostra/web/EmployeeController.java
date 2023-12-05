@@ -1,6 +1,7 @@
 package ma.fiscacostra.web;
 
 
+import lombok.AllArgsConstructor;
 import ma.fiscacostra.entities.Question;
 import ma.fiscacostra.enums.TypeQuestion;
 import ma.fiscacostra.repositories.QuestionRepository;
@@ -16,16 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
+@AllArgsConstructor
 @RestController("/question")
 public class EmployeeController {
-    @Autowired
+
     private QuestionServiceImpl questionService;
-
-    @Autowired
-    public EmployeeController(QuestionServiceImpl questionService){
-        this.questionService=questionService;
-    }
-
 
     @GetMapping("/list")
     public ResponseEntity<List<Question>> listQuestions(@RequestBody Question question) {
