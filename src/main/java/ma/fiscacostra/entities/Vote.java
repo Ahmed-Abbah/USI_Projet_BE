@@ -13,9 +13,6 @@ import ma.fiscacostra.enums.TypeQuestion;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vote {
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
