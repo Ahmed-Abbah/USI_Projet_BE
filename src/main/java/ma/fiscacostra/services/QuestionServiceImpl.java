@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,9 @@ public class QuestionServiceImpl implements QuestionService {
          this.questionRepository=questionRepository;
      }
 
+     public List<Question> findAll(){
+         return this.questionRepository.findAll();
+     }
     public Question saveQuestion(Question question){
         return this.questionRepository.save(question);
     }

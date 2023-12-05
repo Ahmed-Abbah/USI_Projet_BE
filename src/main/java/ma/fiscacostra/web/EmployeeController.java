@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -23,6 +25,14 @@ public class EmployeeController {
     public EmployeeController(QuestionServiceImpl questionService){
         this.questionService=questionService;
     }
+
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Question>> listQuestions(@RequestBody Question question) {
+        List<Question> questionList = questionService.findAll();
+        return new ResponseEntity<>(questionList, HttpStatus.OK);
+    }
+
 
     @PostMapping("/add")
     public ResponseEntity<Question> saveQuestion(@RequestBody Question question) {
