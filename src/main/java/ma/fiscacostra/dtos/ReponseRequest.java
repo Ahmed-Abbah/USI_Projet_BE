@@ -12,7 +12,7 @@ import ma.fiscacostra.enums.TypeQuestion;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RepoonseRequest {
+public class ReponseRequest {
     private String reponse;
 
 }

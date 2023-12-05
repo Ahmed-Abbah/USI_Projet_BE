@@ -24,6 +24,12 @@ public class User {
     private Fonction fonction;
     private Role role;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Vote> vote;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Question> questions;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Reponse> reponses;
 }

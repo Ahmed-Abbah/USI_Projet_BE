@@ -1,6 +1,7 @@
 package ma.fiscacostra.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,11 +21,23 @@ public class Question {
     private String question;
     private TypeQuestion type;
 
+
+    @JsonIgnore
+    @ManyToOne
+    private User user;
+
+
+    @JsonIgnore
+    @ManyToOne
+    private Metier metier;
+
+
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reponse> reponses;
 
-
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Vote> vote;
+
+
 
 }
