@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -130,11 +131,11 @@ public class ReponseServiceImpl implements ReponseService {
 
     @Override
     public ReponseResponse update(Long id, ReponseRequest reponseRequest) {
+
         Reponse existingReponse  = this.reponseRepository.findById(id).get();
         Reponse sendedReponse = this.reponseMapper.ReponseRequestToReponse(reponseRequest);
 
         existingReponse.setReponse(sendedReponse.getReponse());
-
         Reponse updatedReponse = this.reponseRepository.save(existingReponse);
 
         return reponseMapper.reponseToReponseResponse(updatedReponse);
@@ -143,8 +144,19 @@ public class ReponseServiceImpl implements ReponseService {
 
 
     @Override
-    public void delete(Long id) {
-        this.reponseRepository.deleteById(id);
+    public boolean delete(Long id) {
+
+        Optional<Reponse> reponse = this.reponseRepository.findById(id);
+
+        if(reponse.isPresent()){
+
+            reponse.get().setQuestion(null);
+            this.reponseRepository.save(reponse.get());
+            this.reponseRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 
 

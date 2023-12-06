@@ -21,7 +21,7 @@ public class User {
     private String nom;
     private String prenom;
     private Fonction fonction;
-    private Role role = Role.Employee; // On suppose que les utilisateurs dont nous ajoutons sont des tous des employees
+    private Role role = Role.EMPLOYEE; // On suppose que les utilisateurs dont nous ajoutons sont des tous des employees
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Vote> vote;

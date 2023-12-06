@@ -41,7 +41,7 @@ public enum TypeQuestion {
 //    GARANTIES_ET_RECLAMATIONS,
 //    PROTOCOLES_D_ENTRETIEN_ET_DE_MAINTENANCE
 
-    Archive,
-    New
+    ARCHIVE,
+    NEW
 
 }
