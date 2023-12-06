@@ -17,18 +17,24 @@ public class Reponse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String reponse;
-    private TypeQuestion type;
+
     @JsonIgnore
     @ManyToOne
     private Question question;
 
+    @JsonIgnore
     @ManyToOne
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_id")
     private Reponse parent;
 
 
     @OneToMany(mappedBy = "reponse", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Vote> vote;
+
+
 
 
 }

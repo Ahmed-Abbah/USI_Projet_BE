@@ -31,8 +31,8 @@ public class QuestionController {
     public ResponseEntity<Question> saveQuestion(@RequestBody Question question) {
         //TODO :: Specifier le type de la question ???
         System.out.println("Contenu du Question : "+question.getQuestion());
-        System.out.println("Question Type : "+TypeQuestion.ETAPES_DE_LA_CONSTRUCTION);
-        question.setType(String.valueOf(TypeQuestion.ETAPES_DE_LA_CONSTRUCTION));
+        System.out.println("Question Type : "+TypeQuestion.New);
+        question.setType(String.valueOf(TypeQuestion.New));
         Question savedQuestion = questionService.saveQuestion(question);
         return new ResponseEntity<>(savedQuestion, HttpStatus.CREATED);
     }

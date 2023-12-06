@@ -21,8 +21,14 @@ public class User {
     private String nom;
     private String prenom;
     private Fonction fonction;
-    private Role role;
+    private Role role = Role.Employee; // On suppose que les utilisateurs dont nous ajoutons sont des tous des employees
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Vote> vote;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Question> questions;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Reponse> reponses;
 }
