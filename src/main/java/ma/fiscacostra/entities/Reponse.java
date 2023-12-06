@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Reponse {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
