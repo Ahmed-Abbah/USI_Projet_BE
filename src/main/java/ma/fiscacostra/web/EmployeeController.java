@@ -1,6 +1,10 @@
 package ma.fiscacostra.web;
 
 
+
+
+import org.springframework.web.bind.annotation.RestController;
+
 import lombok.AllArgsConstructor;
 import ma.fiscacostra.dtos.ReponseRequest;
 import ma.fiscacostra.dtos.ReponseResponse;
@@ -9,10 +13,12 @@ import ma.fiscacostra.services.VoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/employee")
 public class EmployeeController {
+
 
     private final ReponseService reponseService;
 
@@ -51,6 +57,7 @@ public class EmployeeController {
     public void deleteReponse(@PathVariable Long id){
         this.reponseService.delete(id);
     }
+
 
 
 

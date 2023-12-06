@@ -19,7 +19,7 @@ public class Question {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String question;
-    private TypeQuestion type;
+    private String type;
 
 
     @JsonIgnore
