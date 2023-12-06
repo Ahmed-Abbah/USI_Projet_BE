@@ -10,5 +10,5 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel="spring")
 public interface UserMapper {
     UserResponse userToUserResponse(User user);
-    User userRequestToQuestion(UserRequest userRequest);
+    User userRequestToUser(UserRequest userRequest);
 }
