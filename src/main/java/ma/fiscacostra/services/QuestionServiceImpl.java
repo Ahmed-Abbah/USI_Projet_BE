@@ -23,14 +23,22 @@ public class QuestionServiceImpl implements QuestionService {
      public List<Question> findAll(){
          return this.questionRepository.findAll();
      }
-    public Question saveQuestion(Question question){
+
+     public Question saveQuestion(Question question){
         return this.questionRepository.save(question);
     }
-    public void deleteQuestion(long id){
-        this.questionRepository.deleteById(id);
-    }
 
-    public Optional<Question> findQuestionById(Long id){
+     public boolean deleteQuestion(long id){
+         Optional<Question> question = this.questionRepository.findById(id);
+        if(question.isPresent()){
+            this.questionRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
+     }
+
+     public Optional<Question> findQuestionById(Long id){
          return this.questionRepository.findById(id);
-    }
+     }
 }

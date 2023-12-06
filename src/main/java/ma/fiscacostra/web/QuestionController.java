@@ -5,15 +5,10 @@ import lombok.AllArgsConstructor;
 import ma.fiscacostra.entities.Question;
 import ma.fiscacostra.entities.User;
 import ma.fiscacostra.enums.TypeQuestion;
-import ma.fiscacostra.repositories.QuestionRepository;
 import ma.fiscacostra.services.QuestionServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,9 +39,12 @@ public class QuestionController {
 
     @DeleteMapping("/delete/{questionId}")
     public ResponseEntity<String> deleteQuestion(@PathVariable Long questionId) {
-        this.questionService.deleteQuestion(questionId);
-        System.out.println("Question with ID " + questionId + " has been deleted.");
-        return new ResponseEntity<>("Question with ID " + questionId + " has been deleted.", HttpStatus.OK);
+        if(this.questionService.deleteQuestion(questionId)){
+            System.out.println("Question with ID " + questionId + " has been deleted.");
+            return new ResponseEntity<>("Question with ID " + questionId + " has been deleted.", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Question with ID " + questionId + " not found.", HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping("/modify")
