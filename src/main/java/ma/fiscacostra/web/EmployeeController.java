@@ -17,21 +17,20 @@ public class EmployeeController {
     private final ReponseService reponseService;
 
 
-
-
     /****************************************** La partie aux reponses ************************************/
-    @PostMapping("/reponse/{id}")
+    @PostMapping("/reponse")
     public ReponseService addReponse(@RequestBody ReponseRequest reponseRequest,
-                                     @PathVariable Long id){
+                                     @RequestParam(name = "id") Long id){
         ReponseResponse reponseResponse = this.reponseService.saveResponse(id,reponseRequest);
         return reponseService;
     }
 
 
     /***************************** Les methodes specifiques aux sous reponses *****************************/
-    @PostMapping("/sousreponse/{id_p}/{id_q}")
+    @PostMapping("/sousreponse")
     public ReponseService addSubReponse(@RequestBody ReponseRequest reponseRequest,
-                                     @PathVariable Long id_p,@PathVariable Long id_q){
+                                        @RequestParam(name = "id_p") Long id_p,
+                                        @RequestParam(name = "id_q") Long id_q){
         ReponseResponse reponseResponse = this.reponseService.saveSubResponse(id_p,id_q,reponseRequest);
         return reponseService;
     }
