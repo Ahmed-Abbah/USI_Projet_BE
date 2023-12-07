@@ -18,6 +18,6 @@ public interface ReponseService {
 
     /** email pour la securite apres apres */
 
-    void delete(Long id);
+    boolean delete(Long id);
 
 }

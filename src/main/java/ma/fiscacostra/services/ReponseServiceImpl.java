@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -110,6 +111,7 @@ public class ReponseServiceImpl implements ReponseService {
         Reponse savingReponse= this.reponseMapper.ReponseRequestToReponse(reponseRequest);
 
         savingReponse.setParent(parent);
+        savingReponse.setEnfants(null);
         savingReponse.setQuestion(question);
         //savingReponse.setUser(user);
         List<Vote> votes = new ArrayList<>();
@@ -117,6 +119,13 @@ public class ReponseServiceImpl implements ReponseService {
         savingReponse.setVote(votes);
 
         Reponse savedReponse = this.reponseRepository.save(savingReponse);
+
+
+        /**___Update Parent______*/
+        parent.getEnfants().add(savedReponse);
+        this.reponseRepository.save(parent);
+
+
 
         /**___Update Vote______*/
         savedVote.setReponse(savedReponse);
@@ -130,11 +139,11 @@ public class ReponseServiceImpl implements ReponseService {
 
     @Override
     public ReponseResponse update(Long id, ReponseRequest reponseRequest) {
+
         Reponse existingReponse  = this.reponseRepository.findById(id).get();
         Reponse sendedReponse = this.reponseMapper.ReponseRequestToReponse(reponseRequest);
 
         existingReponse.setReponse(sendedReponse.getReponse());
-
         Reponse updatedReponse = this.reponseRepository.save(existingReponse);
 
         return reponseMapper.reponseToReponseResponse(updatedReponse);
@@ -143,8 +152,35 @@ public class ReponseServiceImpl implements ReponseService {
 
 
     @Override
-    public void delete(Long id) {
-        this.reponseRepository.deleteById(id);
+    public boolean delete(Long id) {
+
+        Optional<Reponse> reponseOptional = this.reponseRepository.findById(id);
+
+        if(reponseOptional.isPresent()){
+
+            Reponse reponse = reponseOptional.get();
+
+
+            if (reponse.getParent() != null) {
+                reponse.getParent().getEnfants().remove(reponse);
+            }
+
+
+            if (reponse.getEnfants() != null) {
+                for (Reponse enfant : reponse.getEnfants()) {
+                    enfant.setParent(null);
+                    this.reponseRepository.delete(enfant);
+                }
+            }
+
+
+
+            /**La suppression*/
+            this.reponseRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 
 

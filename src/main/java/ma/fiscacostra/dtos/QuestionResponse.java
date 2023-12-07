@@ -19,7 +19,6 @@ public class QuestionResponse {
     private Long id;
     private String question;
     private TypeQuestion type;
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ReponseResponse> reponses;
 
 }

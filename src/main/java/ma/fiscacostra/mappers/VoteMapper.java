@@ -10,6 +10,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel="spring")
 public interface VoteMapper {
+    
     VoteResponse voteToVoteResponse(Vote vote);
     Vote voteRequestToVote(VoteRequest voteRequest);
 }
