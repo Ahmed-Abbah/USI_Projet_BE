@@ -11,6 +11,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel="spring")
 public interface ReponseMapper {
+
     ReponseResponse reponseToReponseResponse(Reponse reponse);
     Reponse ReponseRequestToReponse(ReponseRequest reponseRequest);
 }

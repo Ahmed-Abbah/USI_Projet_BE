@@ -111,6 +111,7 @@ public class ReponseServiceImpl implements ReponseService {
         Reponse savingReponse= this.reponseMapper.ReponseRequestToReponse(reponseRequest);
 
         savingReponse.setParent(parent);
+        savingReponse.setEnfants(null);
         savingReponse.setQuestion(question);
         //savingReponse.setUser(user);
         List<Vote> votes = new ArrayList<>();
@@ -118,6 +119,13 @@ public class ReponseServiceImpl implements ReponseService {
         savingReponse.setVote(votes);
 
         Reponse savedReponse = this.reponseRepository.save(savingReponse);
+
+
+        /**___Update Parent______*/
+        parent.getEnfants().add(savedReponse);
+        this.reponseRepository.save(parent);
+
+
 
         /**___Update Vote______*/
         savedVote.setReponse(savedReponse);
@@ -146,12 +154,28 @@ public class ReponseServiceImpl implements ReponseService {
     @Override
     public boolean delete(Long id) {
 
-        Optional<Reponse> reponse = this.reponseRepository.findById(id);
+        Optional<Reponse> reponseOptional = this.reponseRepository.findById(id);
 
-        if(reponse.isPresent()){
+        if(reponseOptional.isPresent()){
 
-            reponse.get().setQuestion(null);
-            this.reponseRepository.save(reponse.get());
+            Reponse reponse = reponseOptional.get();
+
+
+            if (reponse.getParent() != null) {
+                reponse.getParent().getEnfants().remove(reponse);
+            }
+
+
+            if (reponse.getEnfants() != null) {
+                for (Reponse enfant : reponse.getEnfants()) {
+                    enfant.setParent(null);
+                    this.reponseRepository.delete(enfant);
+                }
+            }
+
+
+
+            /**La suppression*/
             this.reponseRepository.deleteById(id);
             return true;
         }else {

@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel="spring")
 public interface QuestionMapper {
+
     QuestionResponse questionToQuestionResponse(Question question);
     Question questionRequestToQuestion(QuestionRequest questionRequest);
 }
