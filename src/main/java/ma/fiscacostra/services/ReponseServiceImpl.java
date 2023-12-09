@@ -159,12 +159,10 @@ public class ReponseServiceImpl implements ReponseService {
         if(reponseOptional.isPresent()){
 
             Reponse reponse = reponseOptional.get();
-
-
+            
             if (reponse.getParent() != null) {
                 reponse.getParent().getEnfants().remove(reponse);
             }
-
 
             if (reponse.getEnfants() != null) {
                 for (Reponse enfant : reponse.getEnfants()) {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/employee")
+@CrossOrigin("*")
 public class VoteController {
     private final VoteService voteService;
 
