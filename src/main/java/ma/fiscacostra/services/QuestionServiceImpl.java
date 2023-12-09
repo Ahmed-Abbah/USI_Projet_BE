@@ -3,15 +3,15 @@ package ma.fiscacostra.services;
 
 import ma.fiscacostra.dtos.QuestionRequest;
 import ma.fiscacostra.dtos.QuestionResponse;
-import ma.fiscacostra.dtos.ReponseRequest;
-import ma.fiscacostra.dtos.ReponseResponse;
+import ma.fiscacostra.entities.Metier;
 import ma.fiscacostra.entities.Question;
-import ma.fiscacostra.entities.Reponse;
+import ma.fiscacostra.entities.User;
 import ma.fiscacostra.enums.TypeQuestion;
 import ma.fiscacostra.mappers.QuestionMapper;
+import ma.fiscacostra.repositories.MetierRpository;
 import ma.fiscacostra.repositories.QuestionRepository;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import ma.fiscacostra.repositories.UserRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +27,15 @@ public class QuestionServiceImpl implements QuestionService {
      private final QuestionRepository questionRepository;
      private final QuestionMapper questionMapper;
 
+    private final UserRepository userRepository;
+    private final MetierRpository metierRpository;
 
-     public QuestionServiceImpl(QuestionRepository questionRepository, QuestionMapper questionMapper){
+
+     public QuestionServiceImpl(QuestionRepository questionRepository, QuestionMapper questionMapper, UserRepository userRepository, MetierRpository metierRpository){
          this.questionRepository=questionRepository;
          this.questionMapper = questionMapper;
+         this.userRepository = userRepository;
+         this.metierRpository = metierRpository;
      }
 
      public QuestionResponse findQuestionById(Long id){
@@ -53,16 +58,51 @@ public class QuestionServiceImpl implements QuestionService {
      }
 
 
+    public List<QuestionResponse> findAllByMetier(String nom){
 
-     public QuestionResponse saveQuestion(QuestionRequest questionRequest){
+        return this.questionRepository.findAllByMetier_Nom(nom)
+                .stream()
+                .map(question -> this.questionMapper.questionToQuestionResponse(question))
+                .collect(Collectors.toList());
 
-         Question question = this.questionMapper.questionRequestToQuestion(questionRequest);
+    }
 
-         question.setType(TypeQuestion.NEW);
 
-         Question saveQuestion = this.questionRepository.save(question);
+     public QuestionResponse saveQuestion(QuestionRequest questionRequest, String email){
 
-         return this.questionMapper.questionToQuestionResponse(saveQuestion);
+
+         /**____find user_______*/
+         User user = this.findUser(email);
+
+
+         /**_____find Metier________*/
+         Metier metier = findMetier(questionRequest.getMetier().getNom());
+
+
+         if(metier != null){
+
+             Question question = this.questionMapper.questionRequestToQuestion(questionRequest);
+
+             question.setType(TypeQuestion.NEW);
+             question.setUser(user);
+             question.setMetier(metier);
+
+
+             Question savedQuestion = this.questionRepository.save(question);
+
+
+             /**_____update Metier________*/
+             metier.getQuestions().add(savedQuestion);
+             this.metierRpository.save(metier);
+
+             return this.questionMapper.questionToQuestionResponse(savedQuestion);
+
+         }else {
+             System.out.println("le metier n'existe pas!!!");
+
+             return null;
+         }
+
     }
 
 
@@ -94,6 +134,13 @@ public class QuestionServiceImpl implements QuestionService {
         return this.questionMapper.questionToQuestionResponse(updatedQuestion);
     }
 
+    private User findUser(String email){
+        return this.userRepository.findByEmail(email);
+    }
+
+    private Metier findMetier(String nom){
+        return this.metierRpository.findByNom(nom);
+    }
 
 
 

@@ -5,6 +5,7 @@ import ma.fiscacostra.dtos.ReponseRequest;
 import ma.fiscacostra.dtos.ReponseResponse;
 import ma.fiscacostra.entities.Question;
 import ma.fiscacostra.entities.Reponse;
+import ma.fiscacostra.entities.User;
 import ma.fiscacostra.entities.Vote;
 import ma.fiscacostra.mappers.ReponseMapper;
 import ma.fiscacostra.repositories.QuestionRepository;
@@ -45,93 +46,97 @@ public class ReponseServiceImpl implements ReponseService {
      * @param id de la question
      */
     @Override
-    public ReponseResponse saveResponse(Long id, ReponseRequest reponseRequest) {
+    public ReponseResponse saveResponse(Long id, ReponseRequest reponseRequest, String email) {
 
         /**____find user____*/
-        //User user = this.findUser(String email);
+        User user = this.findUser(email);
 
         /**____find Question__*/
         Question question = this.findQuestion(id);
 
-        /**___define vote______*/
-        Vote vote = new Vote();
-        vote.setNbreVote(0);
-        vote.setQuestion(question);
-        //vote.setUser(vote);
-        Vote savedVote = this.voteService.save(vote);
+//        /**___define vote______*/
+//        Vote vote = new Vote();
+//        vote.setNbreVote(0);
+//        vote.setQuestion(question);
+//        vote.setUser(vote);
+//        Vote savedVote = this.voteService.save(vote);
 
         /**___Save Reponse______*/
         Reponse savingReponse= this.reponseMapper.ReponseRequestToReponse(reponseRequest);
 
+
         savingReponse.setParent(null);
         savingReponse.setQuestion(question);
-        //savingReponse.setUser(user);
-        List<Vote> votes = new ArrayList<>();
-        votes.add(vote);
-        savingReponse.setVote(votes);
+        savingReponse.setUser(user);
+//        List<Vote> votes = new ArrayList<>();
+//        votes.add(vote);
+//        savingReponse.setVote(votes);
 
         Reponse savedReponse = this.reponseRepository.save(savingReponse);
 
-        /**___Update Vote______*/
-        savedVote.setReponse(savedReponse);
-        Vote updatedVote  = this.voteService.save(savedVote);
+//        /**___Update Vote______*/
+//        savedVote.setReponse(savedReponse);
+//        Vote updatedVote  = this.voteService.save(savedVote);
 
         return this.reponseMapper.reponseToReponseResponse(savedReponse);
     }
 
 
 
-
-    /**
-     * @param id_p de la reponse parente
-     * @param id_q de la question
-     */
+//
+//    /**
+//     * @param id_p de la reponse parente
+//     * @param id_q de la question
+//     */
     @Override
     public ReponseResponse saveSubResponse(Long id_p, Long id_q, ReponseRequest reponseRequest) {
 
-        /**____find user_______*/
-        //User user = this.findUser(String email);
+//        /**____find user_______*/
+//        //User user = this.findUser(String email);
+//
+//        /**____find Parent______*/
+//        Reponse parent = this.findReponse(id_p);
+//
+//        /**_____find Question_____*/
+//        Question question = this.findQuestion(id_q);
+//
+//        /**___define vote______*/
+//        Vote vote = new Vote();
+//        vote.setNbreVote(0);
+//        vote.setQuestion(question);
+//        //vote.setUser(vote);
+//
+//        Vote savedVote = this.voteService.save(vote);
+//
+//        /**____Save SubReponse______*/
+//
+//        Reponse savingReponse= this.reponseMapper.ReponseRequestToReponse(reponseRequest);
+//
+//        savingReponse.setParent(parent);
+//        savingReponse.setEnfants(null);
+//        savingReponse.setQuestion(question);
+//        //savingReponse.setUser(user);
+//        List<Vote> votes = new ArrayList<>();
+//        votes.add(vote);
+//        savingReponse.setVote(votes);
+//
+//        Reponse savedReponse = this.reponseRepository.save(savingReponse);
+//
+//
+//        /**___Update Parent______*/
+//        parent.getEnfants().add(savedReponse);
+//        this.reponseRepository.save(parent);
+//
+//
+//
+//        /**___Update Vote______*/
+//        savedVote.setReponse(savedReponse);
+//        Vote updatedVote  = this.voteService.save(savedVote);
+//
+//        return this.reponseMapper.reponseToReponseResponse(savedReponse);
 
-        /**____find Parent______*/
-        Reponse parent = this.findReponse(id_p);
+        return null;
 
-        /**_____find Question_____*/
-        Question question = this.findQuestion(id_q);
-
-        /**___define vote______*/
-        Vote vote = new Vote();
-        vote.setNbreVote(0);
-        vote.setQuestion(question);
-        //vote.setUser(vote);
-
-        Vote savedVote = this.voteService.save(vote);
-
-        /**____Save SubReponse______*/
-
-        Reponse savingReponse= this.reponseMapper.ReponseRequestToReponse(reponseRequest);
-
-        savingReponse.setParent(parent);
-        savingReponse.setEnfants(null);
-        savingReponse.setQuestion(question);
-        //savingReponse.setUser(user);
-        List<Vote> votes = new ArrayList<>();
-        votes.add(vote);
-        savingReponse.setVote(votes);
-
-        Reponse savedReponse = this.reponseRepository.save(savingReponse);
-
-
-        /**___Update Parent______*/
-        parent.getEnfants().add(savedReponse);
-        this.reponseRepository.save(parent);
-
-
-
-        /**___Update Vote______*/
-        savedVote.setReponse(savedReponse);
-        Vote updatedVote  = this.voteService.save(savedVote);
-
-        return this.reponseMapper.reponseToReponseResponse(savedReponse);
     }
 
 
@@ -184,10 +189,10 @@ public class ReponseServiceImpl implements ReponseService {
 
 
 
-//    private User findUser(String email){
-//        return this.userRepository.findByEmail(email);;
-//    }
-//
+    private User findUser(String email){
+        return this.userRepository.findByEmail(email);
+    }
+
     private Question findQuestion(Long id){
         return this.questionRepository.findById(id).get();
     }

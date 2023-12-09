@@ -7,6 +7,7 @@ import ma.fiscacostra.services.MetierService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/employee/metiers")
+@RequestMapping("/employee/metier")
 @CrossOrigin("*")
 public class MetierController {
 
@@ -22,6 +23,9 @@ public class MetierController {
     private final MetierService metierService;
 
     private final int PAGE_SIZE = 16;
+
+
+    private final JwtDecoder jwtDecoder;
 
 
     @GetMapping

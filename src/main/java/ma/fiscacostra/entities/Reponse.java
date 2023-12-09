@@ -36,8 +36,8 @@ public class Reponse {
     private List<Reponse> enfants;
 
 
-    @OneToMany(mappedBy = "reponse", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Vote> vote;
+//    @OneToMany(mappedBy = "reponse", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<Vote> vote;
 
 
 

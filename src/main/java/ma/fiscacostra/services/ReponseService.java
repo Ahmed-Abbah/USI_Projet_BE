@@ -5,8 +5,7 @@ import ma.fiscacostra.dtos.ReponseRequest;
 
 public interface ReponseService {
 
-    /** email pour la securite apres apres */
-    ReponseResponse saveResponse(Long id,ReponseRequest reponseRequest);
+    ReponseResponse saveResponse(Long id,ReponseRequest reponseRequest, String email);
 
 
 

@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class QuestionRequest {
     private  Long id;
     private String question;
-
+    private MetierRequest metier;
 }

@@ -7,6 +7,8 @@ import ma.fiscacostra.dtos.QuestionResponse;
 import ma.fiscacostra.services.QuestionServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,7 +20,16 @@ import java.util.logging.Logger;
 @RequestMapping("/employee/question")
 @CrossOrigin("*")
 public class QuestionController {
+
+
     private QuestionServiceImpl questionService;
+
+
+    private final JwtDecoder jwtDecoder;
+
+
+
+
 
     @GetMapping("/{questionId}")
     public QuestionResponse getQuestion(@PathVariable Long questionId) {
@@ -26,17 +37,53 @@ public class QuestionController {
     }
 
     @GetMapping
-    public List<QuestionResponse> listQuestions() {
-        return questionService.findAll();
+    public List<QuestionResponse> listQuestions(@RequestParam(name = "nomMetier") String nomMetier) {
+
+        if (nomMetier == "") {
+            return questionService.findAll();
+        }else {
+
+            System.out.println("Metier nom :" + nomMetier);
+            System.out.println("Premier appelation" + questionService.findAllByMetier(nomMetier));
+
+            return questionService.findAllByMetier(nomMetier);
+        }
+
     }
+
+
+//    @GetMapping("/{nomMetier}")
+//    public List<QuestionResponse> listQuestionsByMetier(@PathVariable String nomMetier) {
+//
+//        System.out.println("Metier nom :" + nomMetier);
+//        System.out.println("Metier nom :" + nomMetier);
+//        System.out.println("Metier nom :" + nomMetier);
+//
+//        System.out.println("Premier appelation" + questionService.findAllByMetier(nomMetier));
+//        System.out.println("Premier appelation" + questionService.findAllByMetier(nomMetier));
+//        System.out.println("Premier appelation" + questionService.findAllByMetier(nomMetier));
+//
+//        return questionService.findAllByMetier(nomMetier);
+//    }
 
 
 
     @PostMapping
-    public QuestionResponse saveQuestion(@RequestBody QuestionRequest questionRequest) {
+    public QuestionResponse saveQuestion(@RequestBody QuestionRequest questionRequest,
+                                         @RequestHeader("Authorization") String jwtToken) {
+
+
+        String token = jwtToken.replace("Bearer ", "");
+        Jwt jwt = this.jwtDecoder.decode(token);
+        String email = jwt.getSubject();
+
         questionRequest.setId(null);
-        return questionService.saveQuestion(questionRequest);
+        return questionService.saveQuestion(questionRequest, email);
     }
+
+
+
+
 
 
     @PutMapping("/{questionId}")

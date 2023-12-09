@@ -5,6 +5,8 @@ package ma.fiscacostra.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -23,12 +25,23 @@ public class EmployeeController {
 
     private final ReponseService reponseService;
 
+    private final JwtDecoder jwtDecoder;
+
 
     /****************************************** La partie aux reponses ************************************/
     @PostMapping("/reponse")
     public ReponseResponse addReponse(@RequestBody ReponseRequest reponseRequest,
-                                     @RequestParam(name = "id") Long id){
-        ReponseResponse reponseResponse = this.reponseService.saveResponse(id,reponseRequest);
+                                     @RequestParam(name = "id") Long id,
+                                      @RequestHeader("Authorization") String jwtToken) {
+
+
+        String token = jwtToken.replace("Bearer ", "");
+        Jwt jwt = this.jwtDecoder.decode(token);
+        String email = jwt.getSubject();
+
+
+
+        ReponseResponse reponseResponse = this.reponseService.saveResponse(id,reponseRequest, email);
         return reponseResponse;
     }
 

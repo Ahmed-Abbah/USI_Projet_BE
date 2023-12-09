@@ -7,6 +7,7 @@ import ma.fiscacostra.dtos.UserResponse;
 import ma.fiscacostra.services.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class AdminController {
     private final UserService userService;
 
     private final int PAGE_SIZE = 10;
+
+    private final JwtDecoder jwtDecoder;
 
     @GetMapping
     List<UserResponse> getAllEmployees(@RequestParam(name = "page") int page){

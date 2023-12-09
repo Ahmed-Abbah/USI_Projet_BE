@@ -14,7 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MetierRequest {
-
     private Long id;
     private  String nom;
     private String description;

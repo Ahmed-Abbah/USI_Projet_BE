@@ -7,6 +7,7 @@ import ma.fiscacostra.services.MetierService;
 import ma.fiscacostra.services.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/employee/experts")
+@RequestMapping("/employee/expert")
 @CrossOrigin("*")
 public class ExpertController {
 
@@ -23,6 +24,8 @@ public class ExpertController {
     private final UserService userService;
 
     private final int PAGE_SIZE = 16;
+
+    private final JwtDecoder jwtDecoder;
 
 
     @GetMapping

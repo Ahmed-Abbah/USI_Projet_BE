@@ -22,9 +22,9 @@ public class Vote {
     @ManyToOne
     private Question question;
 
-    @JsonIgnore
-    @ManyToOne
-    private Reponse reponse;
+//    @JsonIgnore
+//    @ManyToOne
+//    private Reponse reponse;
 
     @JsonIgnore
     @ManyToOne
