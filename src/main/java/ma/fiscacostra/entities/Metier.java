@@ -17,6 +17,9 @@ public class Metier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private  String nom;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
     @OneToMany(mappedBy = "metier", fetch = FetchType.EAGER)
     private List<Question> questions;
 }

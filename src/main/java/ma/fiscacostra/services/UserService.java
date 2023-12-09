@@ -1,10 +1,10 @@
 package ma.fiscacostra.services;
 
-import ma.fiscacostra.dtos.ReponseRequest;
-import ma.fiscacostra.dtos.ReponseResponse;
-import ma.fiscacostra.dtos.UserRequest;
-import ma.fiscacostra.dtos.UserResponse;
+import ma.fiscacostra.dtos.*;
 import ma.fiscacostra.entities.User;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface UserService {
 
@@ -17,5 +17,14 @@ public interface UserService {
 
     /** email pour la securite apres apres */
     void delete(Long id);
+
+
+
+    /** email pour la securite apres apres */
+    List<UserResponse> getAllExperts(Pageable pageable);
+
+
+    /** email pour la securite apres apres */
+    List<UserResponse> getAllEmployees(Pageable pageable);
 
 }
