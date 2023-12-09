@@ -17,8 +17,12 @@ import java.util.logging.Logger;
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
-
     private QuestionServiceImpl questionService;
+
+    @GetMapping("/{questionId}")
+    public QuestionResponse getQuestion(@PathVariable Long questionId) {
+        return questionService.findQuestionById(questionId);
+    }
 
     @GetMapping
     public List<QuestionResponse> listQuestions() {
@@ -53,9 +57,4 @@ public class QuestionController {
             return new ResponseEntity<>("Question with ID " + questionId + " not found.", HttpStatus.NOT_FOUND);
         }
     }
-
-
-
-
-
 }

@@ -1,7 +1,7 @@
 package ma.fiscacostra.enums;
 
 public enum Fonction {
-    Fonction_1,
+    SW,
     Fonction_2,
     Fonction_3,
 

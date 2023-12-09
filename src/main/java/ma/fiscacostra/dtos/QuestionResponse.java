@@ -19,6 +19,7 @@ public class QuestionResponse {
     private Long id;
     private String question;
     private TypeQuestion type;
+    private UserResponse user;
     private List<ReponseResponse> reponses;
 
 }

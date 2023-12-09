@@ -10,6 +10,7 @@ import ma.fiscacostra.entities.Reponse;
 import ma.fiscacostra.enums.TypeQuestion;
 import ma.fiscacostra.mappers.QuestionMapper;
 import ma.fiscacostra.repositories.QuestionRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +33,14 @@ public class QuestionServiceImpl implements QuestionService {
          this.questionMapper = questionMapper;
      }
 
+     public QuestionResponse findQuestionById(Long id){
+         Optional<Question> question = this.questionRepository.findById(id);
+         if(question.isPresent()){
+             return this.questionMapper.questionToQuestionResponse(question.get());
+         }
+         return null;
+     }
+
 
 
 
@@ -48,6 +57,7 @@ public class QuestionServiceImpl implements QuestionService {
      public QuestionResponse saveQuestion(QuestionRequest questionRequest){
 
          Question question = this.questionMapper.questionRequestToQuestion(questionRequest);
+
          question.setType(TypeQuestion.NEW);
 
          Question saveQuestion = this.questionRepository.save(question);
