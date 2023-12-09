@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin
+
 @AllArgsConstructor
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/employee/question")
+@CrossOrigin("*")
 public class QuestionController {
 
     private QuestionServiceImpl questionService;
@@ -31,6 +32,7 @@ public class QuestionController {
 
     @PostMapping
     public QuestionResponse saveQuestion(@RequestBody QuestionRequest questionRequest) {
+        questionRequest.setId(null);
         return questionService.saveQuestion(questionRequest);
     }
 

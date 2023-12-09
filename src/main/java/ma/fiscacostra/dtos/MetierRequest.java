@@ -1,19 +1,21 @@
 package ma.fiscacostra.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.fiscacostra.entities.Question;
-import ma.fiscacostra.enums.TypeQuestion;
 
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReponseRequest {
+public class MetierRequest {
 
     private Long id;
-    private String reponse;
+    private  String nom;
+    private String description;
 }

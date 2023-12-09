@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ma.fiscacostra.enums.Expert;
 import ma.fiscacostra.enums.Fonction;
 import ma.fiscacostra.enums.Role;
 
@@ -22,6 +23,7 @@ public class User {
     private String prenom;
     private Fonction fonction;
     private Role role = Role.EMPLOYEE; // On suppose que les utilisateurs dont nous ajoutons sont des tous des employees
+    private Expert expert = Expert.NON;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Vote> vote;
