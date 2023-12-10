@@ -25,7 +25,7 @@ public class FiscaCostraProjectApplication {
     @Autowired
     private UserRepository userRepository;
 
-    @Bean
+   // @Bean
     CommandLineRunner run(UserRepository userRepository, PasswordEncoder passwordEncoder){
         return args -> {
             if(userRepository.findByEmail("admin@admin.com") != null) return;

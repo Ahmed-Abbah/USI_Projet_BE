@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ma.fiscacostra.entities.Metier;
 import ma.fiscacostra.entities.Reponse;
 import ma.fiscacostra.entities.User;
 import ma.fiscacostra.entities.Vote;
@@ -24,6 +25,7 @@ public class QuestionResponse {
 
     private List<VoteResponse> vote;
 
+    private Metier metier;
     private UserResponse user;
     private List<ReponseResponse> reponses;
 
