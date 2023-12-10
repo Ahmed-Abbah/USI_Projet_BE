@@ -1,8 +1,7 @@
 package ma.fiscacostra.web;
 
 import lombok.AllArgsConstructor;
-import ma.fiscacostra.dtos.MetierResponse;
-import ma.fiscacostra.dtos.UserResponse;
+import ma.fiscacostra.dtos.*;
 import ma.fiscacostra.services.MetierService;
 import ma.fiscacostra.services.UserService;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +33,14 @@ public class ExpertController {
         System.out.println("expert");
         Pageable pageable = PageRequest.of(page, this.PAGE_SIZE);
         return  this.userService.getAllExperts(pageable);
+    }
+
+
+    @PutMapping("/{id}")
+    public UserResponse voteResponse(@RequestBody UserRequest userRequest,
+                                     @PathVariable Long id){
+        UserResponse userResponse = this.userService.updateExpert(id);
+        return userResponse;
     }
 
 

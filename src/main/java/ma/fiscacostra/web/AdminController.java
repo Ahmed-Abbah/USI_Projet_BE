@@ -4,6 +4,7 @@ package ma.fiscacostra.web;
 import lombok.AllArgsConstructor;
 import ma.fiscacostra.dtos.UserRequest;
 import ma.fiscacostra.dtos.UserResponse;
+import ma.fiscacostra.enums.Expert;
 import ma.fiscacostra.services.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,6 +38,8 @@ public class AdminController {
     public UserResponse registerNewUser(@RequestBody UserRequest userRequest){
 
         userRequest.setId(null);
+        userRequest.setExpert(Expert.NON);
+
         UserResponse savedUser = userService.saveUser(userRequest);
 
         return savedUser;

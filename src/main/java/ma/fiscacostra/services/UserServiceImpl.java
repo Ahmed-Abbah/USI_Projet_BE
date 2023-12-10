@@ -110,4 +110,14 @@ public class UserServiceImpl implements UserService {
 
         return userResponses;
     }
+
+    @Override
+    public UserResponse updateExpert(Long id) {
+        User existingUser = this.userRepository.findById(id).get();
+        existingUser.setExpert(Expert.OUI);
+
+
+        User updatedUser = this.userRepository.save(existingUser);
+        return this.userMapper.userToUserResponse(updatedUser);
+    }
 }
