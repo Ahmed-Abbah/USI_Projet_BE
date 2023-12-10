@@ -21,7 +21,6 @@ public class UserResponse {
     private Fonction fonction;
     private Role role;
     private Expert expert;
-
     private boolean isExits;
 
 }
