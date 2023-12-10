@@ -1,9 +1,9 @@
 package ma.fiscacostra.enums;
 
 public enum Fonction {
-    Fonction_1,
-    Fonction_2,
-    Fonction_3,
+    FONCTION_1,
+    FONCTION_2,
+    FONCTION_3,
 
-    Retraite
+    RETRAITE
 }

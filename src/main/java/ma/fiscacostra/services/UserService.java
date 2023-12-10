@@ -27,4 +27,7 @@ public interface UserService {
     /** email pour la securite apres apres */
     List<UserResponse> getAllEmployees(Pageable pageable);
 
+    UserResponse updateExpert(Long id);
+
+
 }
