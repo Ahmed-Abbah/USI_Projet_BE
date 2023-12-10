@@ -13,6 +13,9 @@ import ma.fiscacostra.repositories.VoteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class VoteServiceImpl implements VoteService {
@@ -45,15 +48,21 @@ public class VoteServiceImpl implements VoteService {
      * @param id du vote
      */
     @Override
-    public VoteResponse updateVote(Long id, VoteRequest voteRequest) {
+    public VoteResponse updateVote(Long id) {
 
         /**____find user_____*/
         //User user = this.findUser(String email);
-
+//        Optional<Question> optionalQuestion = this.questionRepository.findById(id);
+//
+//        if(optionalQuestion.isPresent()){
+//            Question question = optionalQuestion.get();
+//            List<Vote> questionVotes =  question.getVote();
+//            Vote vote  = new Vote();
+//
+//        }
 
         /**_____Save Vote_______*/
         Vote existingVote = this.voteRepository.findById(id).get();
-        existingVote.setNbreVote(voteRequest.getNbreVote());
         Vote updatedVote = this.voteRepository.save(existingVote);
 
 

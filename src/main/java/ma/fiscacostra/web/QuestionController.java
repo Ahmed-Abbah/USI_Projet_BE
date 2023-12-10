@@ -38,17 +38,13 @@ public class QuestionController {
 
     @GetMapping
     public List<QuestionResponse> listQuestions(@RequestParam(name = "nomMetier") String nomMetier) {
-
         if (nomMetier == "") {
             return questionService.findAll();
         }else {
-
             System.out.println("Metier nom :" + nomMetier);
             System.out.println("Premier appelation" + questionService.findAllByMetier(nomMetier));
-
             return questionService.findAllByMetier(nomMetier);
         }
-
     }
 
 

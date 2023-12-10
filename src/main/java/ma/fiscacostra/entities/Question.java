@@ -34,7 +34,4 @@ public class Question {
 
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Vote> vote;
-
-
-
 }
