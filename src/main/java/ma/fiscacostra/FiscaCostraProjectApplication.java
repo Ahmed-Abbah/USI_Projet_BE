@@ -2,6 +2,7 @@ package ma.fiscacostra;
 
 import ma.fiscacostra.entities.Metier;
 import ma.fiscacostra.entities.User;
+import ma.fiscacostra.enums.Fonction;
 import ma.fiscacostra.enums.Role;
 import ma.fiscacostra.repositories.MetierRpository;
 import ma.fiscacostra.repositories.UserRepository;
@@ -25,16 +26,19 @@ public class FiscaCostraProjectApplication {
     @Autowired
     private UserRepository userRepository;
 
-   // @Bean
+    @Bean
     CommandLineRunner run(UserRepository userRepository, PasswordEncoder passwordEncoder){
         return args -> {
-            if(userRepository.findByEmail("admin@admin.com") != null) return;
+            if(userRepository.findByEmail("haki@gmail.com") != null) return;
             User admin = new User();
-            admin.setEmail("admin@admin.com");
-            admin.setPrenom("Abbah");
-            admin.setPassword(passwordEncoder.encode("admin"));
-            admin.setNom("Ahmed");
+
+            admin.setEmail("haki@gmail.com");
+            admin.setPrenom("Saleh Youssouf");
+            admin.setPassword(passwordEncoder.encode("1234"));
+            admin.setNom("Haki");
             admin.setRole(Role.ADMIN);
+            admin.setFonction(Fonction.ADMINISTRATEUR_SI);
+
             userRepository.save(admin);
         };
     }
@@ -73,7 +77,11 @@ public class FiscaCostraProjectApplication {
             // Save Metier instances to the database
             metierNames.forEach(metierName -> {
                 Metier metier = new Metier();
+
                 metier.setNom(metierName);
+                metier.setDescription("La description du metier....");
+
+
                 metierRpository.save(metier);
             });
         };

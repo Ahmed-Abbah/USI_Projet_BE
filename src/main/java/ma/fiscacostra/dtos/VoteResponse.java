@@ -1,9 +1,13 @@
 package ma.fiscacostra.dtos;
 
 
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -11,4 +15,6 @@ import lombok.NoArgsConstructor;
 public class VoteResponse {
     private  Long id;
     private int nbreVote;
+
+    private Date date;
 }
