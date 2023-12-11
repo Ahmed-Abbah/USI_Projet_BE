@@ -44,27 +44,46 @@ public class VoteServiceImpl implements VoteService {
 
 
 
-
     /**
      *
      * @param id du vote
      */
+//    @Override
+//    public VoteResponse updateVote(Long id) {
+//
+//        /**____find user_____*/
+//        //User user = this.findUser(String email);
+////        Optional<Question> optionalQuestion = this.questionRepository.findById(id);
+////
+////        if(optionalQuestion.isPresent()){
+////            Question question = optionalQuestion.get();
+////            List<Vote> questionVotes =  question.getVote();
+////            Vote vote  = new Vote();
+////
+////        }
+//
+//        /**_____Save Vote_______*/
+//        Vote existingVote = this.voteRepository.findById(id).get();
+//        Vote updatedVote = this.voteRepository.save(existingVote);
+//
+//
+//
+//        return this.voteMapper.voteToVoteResponse(updatedVote);
+//
+//    }
+
+
+
     @Override
-    public VoteResponse updateVote(Long id) {
+    public VoteResponse updateVote(Long id, VoteRequest voteRequest) {
 
         /**____find user_____*/
         //User user = this.findUser(String email);
-//        Optional<Question> optionalQuestion = this.questionRepository.findById(id);
-//
-//        if(optionalQuestion.isPresent()){
-//            Question question = optionalQuestion.get();
-//            List<Vote> questionVotes =  question.getVote();
-//            Vote vote  = new Vote();
-//
-//        }
+
 
         /**_____Save Vote_______*/
         Vote existingVote = this.voteRepository.findById(id).get();
+        existingVote.setNbreVote(voteRequest.getNbreVote());
         Vote updatedVote = this.voteRepository.save(existingVote);
 
 

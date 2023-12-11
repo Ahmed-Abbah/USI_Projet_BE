@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.fiscacostra.entities.Reponse;
+import ma.fiscacostra.entities.User;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public class ReponseResponse {
     private String reponse;
     private ReponseResponse parent;
     private List<ReponseResponse> enfants;
+    private User user;
 }
