@@ -3,15 +3,15 @@ package ma.fiscacostra.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ma.fiscacostra.enums.TypeQuestion;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Question {
@@ -32,6 +32,9 @@ public class Question {
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reponse> reponses;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Vote> vote;
+    @OneToOne(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Vote vote;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date = new Date();
 }

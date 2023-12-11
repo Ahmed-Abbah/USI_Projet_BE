@@ -1,14 +1,18 @@
 package ma.fiscacostra.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ManyToMany;
+import lombok.*;
+import ma.fiscacostra.entities.Vote;
 import ma.fiscacostra.enums.Expert;
 import ma.fiscacostra.enums.Fonction;
 import ma.fiscacostra.enums.Role;
 
+import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponse {
@@ -22,5 +26,6 @@ public class UserResponse {
     private Role role;
     private Expert expert;
     private boolean isExits;
+    private Set<VoteResponse> vote;
 
 }

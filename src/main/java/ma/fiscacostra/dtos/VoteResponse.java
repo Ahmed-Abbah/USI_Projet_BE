@@ -1,14 +1,19 @@
 package ma.fiscacostra.dtos;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import ma.fiscacostra.entities.Question;
+import ma.fiscacostra.entities.User;
 
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VoteResponse {
     private  Long id;
     private int nbreVote;
+//    private QuestionResponse question;
+    private Set<User> votedUsers;
 }

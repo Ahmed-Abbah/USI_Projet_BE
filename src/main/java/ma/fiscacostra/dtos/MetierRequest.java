@@ -3,14 +3,13 @@ package ma.fiscacostra.dtos;
 
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ma.fiscacostra.entities.Question;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MetierRequest {

@@ -3,13 +3,15 @@ package ma.fiscacostra.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ma.fiscacostra.enums.TypeQuestion;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vote {
@@ -19,14 +21,18 @@ public class Vote {
     private int nbreVote;
 
     @JsonIgnore
-    @ManyToOne
+    @OneToOne
     private Question question;
 
 //    @JsonIgnore
 //    @ManyToOne
 //    private Reponse reponse;
 
+//    @JsonIgnore
+//    @ManyToOne
+//    private User user;
+
     @JsonIgnore
-    @ManyToOne
-    private User user;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<User> votedUsers;
 }

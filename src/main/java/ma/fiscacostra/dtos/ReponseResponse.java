@@ -1,15 +1,14 @@
 package ma.fiscacostra.dtos;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ma.fiscacostra.entities.Reponse;
 import ma.fiscacostra.entities.User;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReponseResponse {
