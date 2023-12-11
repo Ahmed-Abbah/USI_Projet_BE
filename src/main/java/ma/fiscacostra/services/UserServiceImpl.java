@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
 
 
             User savingUser = this.userMapper.userRequestToUser(userRequest);
+
             User savedUser = this.userRepository.save(savingUser);
 
             UserResponse userResponse =  this.userMapper.userToUserResponse(savedUser);

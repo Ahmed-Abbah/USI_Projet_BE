@@ -2,10 +2,7 @@ package ma.fiscacostra.entities;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ma.fiscacostra.enums.Expert;
 import ma.fiscacostra.enums.Fonction;
 import ma.fiscacostra.enums.Role;
@@ -13,7 +10,11 @@ import ma.fiscacostra.enums.Role;
 import java.util.List;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+//@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 //@Builder
 public class User {
     @Id

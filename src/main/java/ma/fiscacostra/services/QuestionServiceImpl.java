@@ -60,11 +60,18 @@ public class QuestionServiceImpl implements QuestionService {
 
     public List<QuestionResponse> findAllByMetier(String nom){
 
-        return this.questionRepository.findAllByMetier_Nom(nom)
+        System.out.println("1ere appelation!!!!!");
+        System.out.println("Nom meteir : " + nom);
+        List<QuestionResponse> questionResponses = this.questionRepository.findAllByMetier_Nom(nom)
                 .stream()
                 .map(question -> this.questionMapper.questionToQuestionResponse(question))
                 .collect(Collectors.toList());
+//        System.out.println(questionResponses);
+        System.out.println("2eme appelation!!!!!");
 
+
+
+        return questionResponses;
     }
 
 

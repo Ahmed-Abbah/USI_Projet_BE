@@ -39,6 +39,14 @@ public class AdminController {
 
         userRequest.setId(null);
         userRequest.setExpert(Expert.NON);
+        System.out.println(userRequest.getFonction());
+        System.out.println(userRequest.getFonction());
+        System.out.println(userRequest.getFonction());
+        System.out.println(userRequest.getFonction());
+        System.out.println(userRequest.getFonction());
+        System.out.println(userRequest.getFonction());
+        System.out.println(userRequest.getFonction());
+
 
         UserResponse savedUser = userService.saveUser(userRequest);
 
