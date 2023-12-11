@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-//@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,9 +32,9 @@ public class Question {
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Reponse> reponses;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Vote> vote;
 
+    @OneToOne(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Vote vote;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();

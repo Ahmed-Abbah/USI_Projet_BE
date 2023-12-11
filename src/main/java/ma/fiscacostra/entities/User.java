@@ -8,9 +8,10 @@ import ma.fiscacostra.enums.Fonction;
 import ma.fiscacostra.enums.Role;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
-//@Data
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,8 +29,8 @@ public class User {
     private Role role = Role.EMPLOYEE; // On suppose que les utilisateurs dont nous ajoutons sont des tous des employees
     private Expert expert = Expert.NON;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Vote> vote;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Vote> vote;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Question> questions;

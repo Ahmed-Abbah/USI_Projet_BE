@@ -29,13 +29,14 @@ public class FiscaCostraProjectApplication {
     @Bean
     CommandLineRunner run(UserRepository userRepository, PasswordEncoder passwordEncoder){
         return args -> {
-            if(userRepository.findByEmail("haki@gmail.com") != null) return;
-            User admin = new User();
 
-            admin.setEmail("haki@gmail.com");
-            admin.setPrenom("Saleh Youssouf");
-            admin.setPassword(passwordEncoder.encode("1234"));
-            admin.setNom("Haki");
+            if(userRepository.findByEmail("ahmed@gmail.com") != null) return;
+            User admin = new User();
+            admin.setEmail("ahmed@gmail.com");
+            admin.setPrenom("Abbah");
+            admin.setPassword(passwordEncoder.encode("admin"));
+            admin.setNom("Ahmed");
+
             admin.setRole(Role.ADMIN);
             admin.setFonction(Fonction.ADMINISTRATEUR_SI);
 

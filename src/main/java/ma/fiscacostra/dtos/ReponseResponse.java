@@ -1,18 +1,16 @@
 package ma.fiscacostra.dtos;
-
-
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ma.fiscacostra.entities.Reponse;
+
+import lombok.Setter;
 import ma.fiscacostra.entities.User;
 
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReponseResponse {

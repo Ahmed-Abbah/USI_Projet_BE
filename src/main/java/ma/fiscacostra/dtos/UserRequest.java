@@ -1,13 +1,12 @@
 package ma.fiscacostra.dtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ma.fiscacostra.enums.Expert;
 import ma.fiscacostra.enums.Fonction;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {

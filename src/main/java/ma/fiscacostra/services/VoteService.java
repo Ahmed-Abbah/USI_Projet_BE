@@ -11,7 +11,7 @@ public interface VoteService {
 
 
     /** email pour la securite apres apres */
-    VoteResponse updateVote(Long id,VoteRequest voteRequest);
+    void updateVote(Long questionId,String email);
 
 
 

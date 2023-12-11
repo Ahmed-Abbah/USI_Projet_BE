@@ -1,20 +1,22 @@
 package ma.fiscacostra.dtos;
 
-
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import ma.fiscacostra.entities.User;
 
 import java.util.Date;
+import java.util.Set;
 
-@Data
+
+@Getter
+@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class VoteResponse {
     private  Long id;
     private int nbreVote;
 
-    private Date date;
+//    private QuestionResponse question;
+    private Set<User> votedUsers;
+
 }
